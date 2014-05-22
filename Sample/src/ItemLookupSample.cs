@@ -32,15 +32,16 @@ namespace AmazonProductAdvtApi
     class ItemLookupSample
     {
         private const string MY_AWS_ACCESS_KEY_ID = "YOUR_AWS_ACCESS_KEY_ID";
-        private const string MY_AWS_SECRET_KEY    = "YOUR_AWS_SECRET_KEY";
+        private const string MY_AWS_SECRET_KEY = "YOUR_AWS_SECRET_KEY";
         private const string DESTINATION          = "ecs.amazonaws.com";
-        
-        private const string NAMESPACE = "http://webservices.amazon.com/AWSECommerceService/2009-03-31";
+        private const string ASSOCIATE_TAG = "YOUR_ASSOCIATE_TAG";
+
+        private const string NAMESPACE = "http://webservices.amazon.com/AWSECommerceService/2011-08-01";
         private const string ITEM_ID   = "0545010225";
 
         public static void Main()
         {
-            SignedRequestHelper helper = new SignedRequestHelper(MY_AWS_ACCESS_KEY_ID, MY_AWS_SECRET_KEY, DESTINATION);
+            SignedRequestHelper helper = new SignedRequestHelper(MY_AWS_ACCESS_KEY_ID, MY_AWS_SECRET_KEY, DESTINATION, ASSOCIATE_TAG);
 
             /*
              * The helper supports two forms of requests - dictionary form and query string form.
