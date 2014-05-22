@@ -31,6 +31,7 @@ namespace AmazonProductAdvtApi
     {
         private string endPoint;
         private string akid;
+        private string associateTag;
         private byte[] secret;
         private HMAC signer;
 
@@ -49,11 +50,12 @@ namespace AmazonProductAdvtApi
          *  FR: ecs.amazonaws.fr
          *  CA: ecs.amazonaws.ca
          */
-        public SignedRequestHelper(string awsAccessKeyId, string awsSecretKey, string destination)
+        public SignedRequestHelper(string awsAccessKeyId, string awsSecretKey, string destination, string associateTag)
         {
             this.endPoint = destination.ToLower();
             this.akid = awsAccessKeyId;
             this.secret = Encoding.UTF8.GetBytes(awsSecretKey);
+            this.associateTag = associateTag;
             this.signer = new HMACSHA256(this.secret);
         }
 
@@ -73,6 +75,7 @@ namespace AmazonProductAdvtApi
             // Add the AWSAccessKeyId and Timestamp to the requests.
             sortedMap["AWSAccessKeyId"] = this.akid;
             sortedMap["Timestamp"] = this.GetTimestamp();
+            sortedMap["AssociateTag"] = this.associateTag;
 
             // Get the canonical query string
             string canonicalQS = this.ConstructCanonicalQueryString(sortedMap);
